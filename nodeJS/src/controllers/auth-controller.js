@@ -1,9 +1,9 @@
 const { validate } = require("email-validator");
 const User = require("../models/user");
-
 const bcrtypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 
-class AuthControler {
+class AuthController {
     async singUp(req, res) {
         try {
             let { name, email, password, confirmPassword } = req.body;
@@ -67,6 +67,51 @@ class AuthControler {
                 .json({ message: err });
         }
     }
+
+    async singIn(req, res) {
+        try {
+            const { email, password } = req.body;
+            if (!email) {
+                return res
+                    .status(422)
+                    .json({ message: "Email is required!" });
+            };
+
+            if (!password) {
+                return res
+                    .status(422)
+                    .json({ message: "Password is required!" });
+            };
+
+            const user = await User.findOne({ email: email });
+
+            if (!user) {
+                return res
+                    .status(404)
+                    .json({ message: "User not found!" });
+            };
+
+            const validatePassword = await bcrtypt.compare(password, user.password);
+
+            if (!validatePassword) {
+                return res
+                    .status(422)
+                    .json({ message: "Invalid Password!" });
+            };
+
+            const secret = process.env.SECRET;
+            const token = jwt.sing(
+                {
+                    id: user._id,
+                },
+                secret
+            );
+            res.status(200).json({ message: "User logged in ssuccessfuly!" })
+
+        } catch (error) {
+            return res.status(500).json({ message: error })
+        }
+    }
 }
 
-module.exports = new AuthControler();
+module.exports = new AuthController();
