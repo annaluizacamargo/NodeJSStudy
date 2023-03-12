@@ -2,6 +2,8 @@ require("dotenv").config(); //importação global
 //dotenv = utilizado como variável de ambiente
 
 const express = require("express");
+const dbConnect = require("./config/db/mongodb");
+const router = require("./routes");
 //express = biblioteca para montar a API
 
 const port = process.env.PORT;
@@ -12,5 +14,9 @@ const app = express();
 app.use(express.json());
 //informando que a entrada e saída de dados será do tipo json
 
+app.use(router);
+
 app.listen(port, () => console.log(`Server started on port ${port}`));
 //solicitando para o express listar, na porta informada, e solicitando para exibir determinada mensagem, ou seja, subindo o servidor
+
+dbConnect();
