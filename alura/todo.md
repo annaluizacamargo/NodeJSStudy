@@ -20,3 +20,12 @@ https://www.alura.com.br/artigos/arquitetura-node-js-entenda-loop-de-eventos
 
 https://www.youtube.com/watch?v=r_v5PBV8ltE&list=PLh2Y_pKOa4UeJOI2P-N6J8nGyV3aCuO3O&index=5
 
+/////////////////////
+
+https://cursos.alura.com.br/extra/alura-mais/o-que-e-back-end-e-front-end-c9076
+
+https://cursos.alura.com.br/extra/alura-mais/destructuring-em-js-c308
+
+https://www.alura.com.br/artigos/estruturas-de-dados-introducao
+
+https://www.alura.com.br/artigos/async-await-no-javascript-o-que-e-e-quando-usar
